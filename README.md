@@ -1,41 +1,48 @@
-# amazon_cognito_upload
+# amazon_cognito_upload_plus
 
-The amazon_cognito_upload package is a Dart library designed to simplify and streamline the process
-of uploading files to Amazon Cognito, a robust and secure cloud service offered by Amazon Web
-Services (AWS). This package is particularly useful for those who need to integrate file upload
-functionality with Amazon Cognito authentication.
+`amazon_cognito_upload_plus` is a Dart library designed to simplify and streamline file uploads to **Amazon S3** using **pre-signed URLs** and **Amazon Cognito authentication**.
 
 ## Features
 
-* Simplified File Uploads: Streamline the process of uploading files to Amazon Cognito, reducing
-  development time and complexity.
-* Customizable Configuration: Tailor the package to meet your specific requirements with
-  customizable configuration options.
+- ✅ **Easy File Uploads**: Upload files directly to **Amazon S3** using pre-signed URLs.
+- ✅ **Secure with AWS Cognito**: Authenticate users via **Amazon Cognito**.
+- ✅ **Customizable**: Supports **custom configurations** for flexibility.
 
-## Getting started
+## 🚀 Installation
 
-Install
-
-Add the **amazon_cognito_upload** package to your pubspec dependencies.
+Add the **amazon_cognito_upload_plus** package to your `pubspec.yaml`:
 
 Super simple to use
 
+```yaml
+dependencies:
+  amazon_cognito_upload_plus: ^0.0.1
+```
+
 ```dart
 
-import 'package:amazon_cognito_upload/amazon_cognito_upload.dart';
+import 'package:amazon_cognito_upload_plus/amazon_cognito_upload_plus.dart';
+import 'dart:typed_data';
 
-void uploadFile() {
-  AWSWebClient.uploadFile(
-    s3UploadUrl: '', //s3 bucket url like : https://yourBucketName.s3.region.amazonaws.com/
-    s3SecretKey: '',
-    s3Region: '',
-    s3AccessKey: '',
-    s3BucketName: '',
-    folderName: '',
-    fileName: '',
-    fileBytes: '',
+Future<void> uploadFile(Uint8List fileBytes) async {
+  String? uploadedUrl = await AWSWebClient.uploadFile(
+    s3UploadUrl: 'https://yourBucketName.s3.region.amazonaws.com/',
+    s3SecretKey: 'your-secret-key',
+    s3Region: 'your-region',
+    s3AccessKey: 'your-access-key',
+    s3BucketName: 'your-bucket-name',
+    folderName: 'uploads',
+    fileName: 'example.jpg',
+    fileBytes: fileBytes,
   );
+
+  if (uploadedUrl != null) {
+    print("✅ File uploaded successfully: $uploadedUrl");
+  } else {
+    print("❌ Upload failed.");
+  }
 }
+
 ```
 
 ## Important

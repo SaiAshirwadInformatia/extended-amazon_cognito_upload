@@ -1,4 +1,4 @@
-library amazon_cognito_upload;
+library amazon_cognito_upload_plus;
 
 import 'dart:convert';
 
@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 class AWSWebClient {
   const AWSWebClient();
 
-  static void uploadFile({
+  static Future<String?> uploadFile({
     required String s3UploadUrl,
     required String s3SecretKey,
     required String s3Region,
@@ -22,9 +22,7 @@ class AWSWebClient {
     final length = fileBytes.length;
     Map<String, String> headers = {
       "Access-Control-Allow-Origin": "*",
-      // Required for CORS support to work
       "Access-Control-Allow-Credentials": "true",
-      // Required for cookies, authorization headers with HTTPS
       "Access-Control-Allow-Headers":
           "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
       "Access-Control-Allow-Methods": "POST, OPTIONS"
@@ -35,11 +33,13 @@ class AWSWebClient {
     final multipartFile = http.MultipartFile(
         'file', http.ByteStream.fromBytes(fileBytes), length,
         filename: fileName);
+
     final policy = Policy.fromS3PresignedPost('$folderName/$fileName',
         s3BucketName, s3AccessKey, 15, length, s3Region);
     final key =
         SigV4.calculateSigningKey(s3SecretKey, policy.datetime, s3Region, 's3');
     final signature = SigV4.calculateSignature(key, policy.encode());
+
     req.headers.addAll(headers);
     req.files.add(multipartFile);
     req.fields['key'] = policy.key;
@@ -52,12 +52,21 @@ class AWSWebClient {
 
     try {
       final res = await req.send();
-      debugPrint('S3UploadRequest : ${res.request}');
-      var response = await http.Response.fromStream(res);
-      print('s3 statusCode :${response.statusCode}');
-      print('$fileName uploaded to s3Bucket');
+      final response = await http.Response.fromStream(res);
+
+      if (response.statusCode == 204 || response.statusCode == 200) {
+        final fileUrl =
+            'https://$s3BucketName.s3.$s3Region.amazonaws.com/$folderName/$fileName';
+        debugPrint('✅ Upload successful: $fileUrl');
+        return fileUrl; // Return the file URL
+      } else {
+        debugPrint(
+            '❌ Upload failed. Status: ${response.statusCode}, Body: ${response.body}');
+        return null; // Return null on failure
+      }
     } catch (e) {
-      print(e.toString());
+      debugPrint('⚠️ Error uploading file: $e');
+      return null;
     }
   }
 }

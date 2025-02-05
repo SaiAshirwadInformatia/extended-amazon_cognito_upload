@@ -8,7 +8,7 @@
 
 import 'dart:async';
 import 'dart:developer' as developer;
-import 'package:amazon_cognito_upload/amazon_cognito_upload.dart';
+import 'package:amazon_cognito_upload_plus/amazon_cognito_upload.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -58,11 +58,13 @@ class _MyAppState extends State<MyApp> {
                   s3UploadUrl: 'S3_UPLOAD_URL', //your bucket url
                   s3SecretKey: 'S3_SECRET_KEY', //your secret key
                   s3Region: 'S3_REGION', //your region
-                  s3AccessKey:'S3_ACCESS_KEY' , //your access key
-                  s3BucketName: 'S3_BUCKET',    //your bucket name
-                  folderName: 'profile',       //This folder name will auto generate folder in your bucket
-                  fileName: 'imagedata.png',  //your file name
-                  fileBytes: imageByte, //your file bytes Note: it will take file as byte so you have to convert file into byte
+                  s3AccessKey: 'S3_ACCESS_KEY', //your access key
+                  s3BucketName: 'S3_BUCKET', //your bucket name
+                  folderName:
+                      'profile', //This folder name will auto generate folder in your bucket
+                  fileName: 'imagedata.png', //your file name
+                  fileBytes:
+                      imageByte, //your file bytes Note: it will take file as byte so you have to convert file into byte
                 );
               },
               child: Text('Upload Image'),
