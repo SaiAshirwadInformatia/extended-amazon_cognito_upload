@@ -1,6 +1,6 @@
 name: amazon_cognito_upload_plus
 description: The amazon_cognito_upload_plus package is a Dart library designed to simplify and streamline the process of uploading files to Amazon S3 Bucket.
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/jaiminraval274/amazon_cognito_upload.git
 
 environment:
