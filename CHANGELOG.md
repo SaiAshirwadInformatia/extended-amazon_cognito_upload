@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * Updated README File
+
+## 0.0.4
+
+* Flutter cleaned

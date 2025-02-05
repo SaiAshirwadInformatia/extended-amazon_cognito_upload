@@ -16,7 +16,7 @@ Super simple to use
 
 ```yaml
 dependencies:
-  amazon_cognito_upload_plus: ^0.0.3
+  amazon_cognito_upload_plus: ^0.0.4
 ```
 
 ```dart
