@@ -16,7 +16,7 @@ Super simple to use
 
 ```yaml
 dependencies:
-  amazon_cognito_upload_plus: ^0.0.2
+  amazon_cognito_upload_plus: ^0.0.3
 ```
 
 ```dart
@@ -50,10 +50,4 @@ Future<void> uploadFile(Uint8List fileBytes) async {
 Remember that enabling CORS for public access temporary when you upload file to S3 bucket.
 the security implications of allowing cross-origin requests. Make sure to only allow the origins
 that you trust.
-
-
-#### Support me to grow for better work
-
-<a href="https://www.buymeacoffee.com/jaiminraval" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
 
