@@ -56,16 +56,16 @@ class _MyAppState extends State<MyApp> {
     );
 
     String? fileUrl = await AWSWebClient.uploadFile(
-      s3UploadUrl: 'S3_UPLOAD_URL', // Your bucket URL
-      s3SecretKey:
-          'S3_SECRET_KEY', // Your secret key (should be stored securely!)
-      s3Region: 'S3_REGION', // Your region
-      s3AccessKey: 'S3_ACCESS_KEY', // Your access key
-      s3BucketName: 'S3_BUCKET', // Your bucket name
-      folderName: 'profile', // Auto-generate folder in your bucket
-      fileName: 'imagedata.png', // Your file name
-      fileBytes: imageBytes!, // Convert file to bytes
-    );
+        uploadUrl: 'S3_UPLOAD_URL', // Your bucket URL
+        secretKey:
+            'S3_SECRET_KEY', // Your secret key (should be stored securely!)
+        region: 'S3_REGION', // Your region
+        accessKey: 'S3_ACCESS_KEY', // Your access key
+        bucketName: 'S3_BUCKET', // Your bucket name
+        folderName: 'profile', // Auto-generate folder in your bucket
+        fileName: 'imagedata.png', // Your file name
+        fileBytes: imageBytes!, // Convert file to bytes
+        storageType: StorageType.s3);
 
     if (fileUrl != null) {
       setState(() {
