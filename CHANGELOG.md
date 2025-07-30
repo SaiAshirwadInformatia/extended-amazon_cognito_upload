@@ -13,3 +13,7 @@
 ## 0.0.4
 
 * Flutter cleaned
+
+## 0.0.5
+
+* Added new support for R2
